@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "maintenance";
+# Login de connexion à la base de données
+$servername = "localhost"; // Nom du serveur MySQL, par défaut localhost
+$username = "root"; // Nom d'utilisateur de la base de donnée, par défaut root
+$password = "root"; // Mot de passe utilisateur de la base de donnée, par défaut root
+$dbname = "maintenance"; // Nom de la base de données à utiliser
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);

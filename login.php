@@ -1,10 +1,10 @@
 <?php
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "maintenance";
+# Login de connexion à la base de données
+$servername = "localhost"; // Nom du serveur MySQL, par défaut localhost
+$username = "root"; // Nom d'utilisateur de la base de donnée, par défaut root
+$password = "root"; // Mot de passe utilisateur de la base de donnée, par défaut root
+$dbname = "maintenance"; // Nom de la base de données à utiliser
 
 // Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,14 +14,16 @@ if ($conn->connect_error) {
     die("Échec de la connexion : " . $conn->connect_error);
 }
 
+# Récupération des données du formulaire
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
-    // Requête avec vulnérabilité SQL Injection
+    # Récupération de l'utilisateur dans la base de données
     $sql = "SELECT password FROM Users WHERE username = '$name' AND password = '$password'";
     $result = $conn->query($sql);
 
+    # Si on récupère un résultat, on stock le nom d'utilisateur dans la session et on redirige vers l'accueil
     if ($result && $result->num_rows > 0) {
         $_SESSION['name'] = $name;
         header("Location: index.php?name=" . urlencode($name));
